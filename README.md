@@ -2,37 +2,50 @@
 
 ## Overview
 
-This assignment evaluates your ability to build and assess AI agents that can analyze code, understand vulnerabilities, and apply fixes autonomously.
+This assignment evaluates your ability to **build autonomous AI agents** that can analyze code, identify vulnerabilities, and determine appropriate fixes.
 
-You'll research **CWE-22 (Path Traversal)** vulnerability online, then build an AI agent that analyzes vulnerable code, determines the appropriate fix, and applies it.
+**The Challenge:** Build an AI agent that discovers and fixes a CWE-22 (Path Traversal) vulnerability without being told what the vulnerability is or how to fix it.
 
 ## What You're Given
 
-1. **Vulnerability**: **CWE-22: Path Traversal** (Improper Limitation of a Pathname)
-   - **Research online**: [CWE-22 Details](https://cwe.mitre.org/data/definitions/22.html) | [OWASP Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)
-   - Understand what path traversal is and how to prevent it
-2. **Vulnerable Code**: `file_reader.py` (has the vulnerability)
-3. **Test Suite**: `test_file_reader.py` (2 tests currently FAIL due to the vulnerability)
+1. **Vulnerable Code**: `file_reader.py` - contains a security vulnerability
+2. **Test Suite**: `test_file_reader.py` - defines expected security behavior (2 tests currently FAIL)
+3. **Context**: The vulnerability is CWE-22 related (for your research)
+
+**Resources for your research:**
+- [CWE-22 Details](https://cwe.mitre.org/data/definitions/22.html)
+- [OWASP Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)
 
 ## Your Goal
 
-**Build an agent (`agent.py`) that:**
-1. Analyzes `file_reader.py` to understand the vulnerability (CWE-22)
-2. Determines the appropriate fix
-3. Applies the fix to `file_reader.py`
-4. Makes all tests pass ✅
+**Build an autonomous agent (`agent.py`) that:**
+
+1. **Analyzes** the code to identify what vulnerability exists and where
+2. **Determines** what type of fix is needed based on its analysis
+3. **Generates** and applies the appropriate fix
+4. **Validates** that all tests pass
+
+## Key Requirement: Autonomy
+
+⚠️ **Critical:** Your agent must autonomously analyze and determine the fix.
+
+**What this means:**
+- ✅ Agent reads the code and identifies the vulnerability through analysis
+- ✅ Agent determines the fix strategy based on its understanding
+- ✅ Agent can explain what it found and why its fix is appropriate
+- ❌ Do NOT hardcode the vulnerability type in your agent's logic
+- ❌ Do NOT hardcode fix instructions in your prompts (e.g., "use pathlib and resolve()")
+- ❌ Do NOT tell the LLM what CWE-22 is or how to fix it
+
+**Think of it this way:** If we replaced `file_reader.py` with a different vulnerability (SQL injection, XSS, etc.), would your agent still work? If not, it's not truly autonomous.
+
+## What We're Evaluating
+
+**Autonomous AI agent capability** - Does your agent analyze, determine, and report on its findings independently?
 
 ## Getting Started
 
-### 1. Research the Vulnerability
-
-**Start by researching CWE-22 (Path Traversal) online:**
-- Read about it on [CWE-22](https://cwe.mitre.org/data/definitions/22.html) or [OWASP](https://owasp.org/www-community/attacks/Path_Traversal)
-- Understand what path traversal attacks are
-- Learn about common fixes and mitigations
-- This research will inform how you build your agent
-
-### 2. Setup Environment
+### 1. Setup Environment
 
 ```bash
 python3 -m venv venv
@@ -40,68 +53,113 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Verify the Vulnerability
+### 2. Verify the Vulnerability Exists
 
 ```bash
 pytest test_file_reader.py -v
 ```
 
-You should see 2 tests **FAIL** (path_traversal_blocked and absolute_path_blocked).
+You should see 2 tests **FAIL**.
+
+### 3. Research CWE-22
+
+- Understand what path traversal vulnerabilities are
+- Learn about common attack patterns
+- Research remediation approaches
+- **Use this knowledge to inform your agent's design, not to hardcode solutions**
 
 ### 4. Build Your Agent
 
-Create `agent.py` that:
-- Analyzes the vulnerable code in `file_reader.py`
-- Uses your understanding of CWE-22 to determine the fix
-- Applies the fix to `file_reader.py`
+Your agent should have distinct phases:
+
+**Analysis Phase:**
+- Read and analyze `file_reader.py`
+- Identify security issues
+- Determine vulnerability type
+
+**Fix Generation Phase:**
+- Based on the analysis, determine appropriate fix
+- Generate secure code
+
+**Validation Phase:**
+- Apply the fix
+- Run tests to verify
+
+**Reporting Phase:**
+- Generate REPORT.md with findings and analysis
 
 ### 5. Run and Verify
 
 ```bash
-python agent.py
-pytest test_file_reader.py -v  # All tests should now PASS
+python agent.py                 # Should analyze, fix, and generate REPORT.md
+pytest test_file_reader.py -v  # All tests should PASS
 ```
-
 
 ## Deliverables
 
-Submit these three files:
-
-### 1. `agent.py` - Your AI Agent Implementation
+### 1. `agent.py` - Your AI Agent
 
 Your agent must:
-- Read and analyze `file_reader.py` and `test_file_reader.py`
-- Understand CWE-22 (Path Traversal vulnerability)
-- Determine the appropriate fix
-- Modify `file_reader.py` to apply the fix
+- Analyze code to identify vulnerabilities
+- Determine appropriate fixes autonomously
+- Apply the fix to `file_reader.py`
+- Generate a `REPORT.md` with its findings and analysis
 - Be runnable via: `python agent.py`
 
-**Important**: The agent should autonomously analyze and fix the code, not have the fix hardcoded.
+### 2. `REPORT.md` - Auto-Generated Report
 
-### 2. `REPORT.md` - Evaluation Report (1-2 pages)
+**Your agent should automatically generate this report** with:
+- What vulnerability was identified and where
+- How the agent analyzed the code
+- What fix was determined and why
+- Performance metrics (time, API calls, iterations)
+- Test results
 
-Include:
-- **Architecture**: Brief description of your agent's design and approach
-- **Research Summary**: What you learned about CWE-22 from your online research
-- **Analysis Strategy**: How the agent analyzed the code and determined the fix
-- **Findings**: Summary of the vulnerability and the fix applied
-- **Performance Metrics**: Time taken, iterations, success rate
-- **Evaluation**: What worked well, what didn't, limitations
-- **Improvements**: What you'd do differently with more time
+See `REPORT_TEMPLATE.md` for the expected structure.
 
-See `REPORT_TEMPLATE.md` for a detailed template.
+### 3. `requirements.txt`
 
-### 3. `requirements.txt` - Dependencies
-
-Add any libraries your agent needs (APIs, LLM clients, web scraping, etc.)
+List all dependencies your agent needs.
 
 ## Rules & Guidelines
 
-- ✅ **Use any AI tools/APIs**: OpenAI, Anthropic, Claude, etc. to build your agent
-- ✅ **Agent must be autonomous**: Don't hardcode the fix - the agent should analyze and determine it
-- ✅ **Any Python libraries**: Use whatever you need
-- ✅ **Partial submissions OK**: If you run out of time, submit what you have
+- ✅ **Use any LLM APIs**: OpenAI, Anthropic, etc.
+- ✅ **Use any libraries**: Static analysis tools, security scanners, etc.
+- ✅ **Partial submissions OK**: Submit what you have if time runs out
 - ⏱️ **Time limit**: Up to 3 hours
-- 🚫 **Don't modify tests**: Fix the vulnerable code, not the test file
+- 🚫 **Don't modify tests**: They define the security requirements
+- 🚫 **Don't hardcode solutions**: Agent must discover and determine autonomously
+
+## Common Pitfalls to Avoid
+
+❌ **Prescriptive prompts** like:
+```
+"Fix the CWE-22 path traversal vulnerability using pathlib.resolve() 
+and checking if the path is inside the base directory"
+```
+
+✅ **Autonomous prompts** like:
+```
+"Analyze this code for security vulnerabilities. Identify any issues 
+and determine appropriate fixes."
+```
+
+❌ **Assuming vulnerability type**:
+```python
+# Don't do this:
+prompt = "Fix the path traversal in file_reader.py"
+```
+
+✅ **Discovering vulnerability type**:
+```python
+# Do this:
+analysis = agent.analyze_code("file_reader.py")
+vulnerability_type = analysis.identify_vulnerabilities()
+fix = agent.determine_fix(vulnerability_type)
+```
+
+## Questions?
+
+Remember: We're evaluating your ability to build **autonomous AI agents**, not your ability to write prompts that instruct LLMs. Show us you can build systems that reason and analyze.
 
 Good luck! 🚀
