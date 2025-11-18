@@ -66,6 +66,19 @@ python agent.py                # Analyze, fix, and generate report
 pytest test_file_reader.py -v  # Should see all PASS
 ```
 
+## Using LLMs
+
+**What we examine in this exercise is your agentic coding abilities:**
+- How your agent analyzes code
+- How it runs and interprets tests
+- How it identifies problems and fixes them
+- The architecture and flow of your solution
+
+The choice of LLM is not part of the evaluation.
+You may choose an LLM provider of your choice, including open source models.
+
+Please briefly note in your submission how to run your solution (env variables, local model setup, etc.).
+
 ## Deliverables
 
 1. **`agent.py`** - Your autonomous agent
@@ -74,7 +87,7 @@ pytest test_file_reader.py -v  # Should see all PASS
 
 ## Rules
 
-- ✅ Use any LLM APIs and Agentic frameworks (OpenAI, Anthropic, Langchain/Langgraph, etc.)
+- ✅ Use any LLM APIs and Agentic frameworks
 - ✅ Use any Python libraries
 - ⏱️ Time limit: Up to 3 hours
 - 🚫 Don't modify test files
