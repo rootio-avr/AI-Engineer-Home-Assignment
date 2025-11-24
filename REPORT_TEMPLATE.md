@@ -1,97 +1,94 @@
-# Agent Evaluation Report
+# CVE Research & Fix Report
 
-**Candidate Name:** [Your Name]
+**CVE ID:** [CVE-YYYY-NNNNN]
+**CWE ID:** [CWE-NNN]
 **Date:** [Date]
-**Time Spent:** [X hours Y minutes]
+**Status:** [Success/Failed]
 
 ---
 
-## 1. Agent Architecture
+## 1. Vulnerability Summary
 
-[Describe your agent design in 2-3 paragraphs. Include what components your agent has, what approach you took, why you chose this architecture, and how the agent analyzes code and determines fixes.]
+**Vulnerability Type:** [e.g., Path Traversal, SQL Injection, etc.]
 
----
+**Description:**
 
-## 2. Research Summary
+[Brief description of what this vulnerability is and why it's dangerous]
 
-**What I learned about CWE-22 (Path Traversal):**
+**Affected Code:**
 
-[Summarize what you discovered from researching online]
-
-**Key sources used:**
-
-[List the sources you consulted]
-
-**Understanding of the vulnerability:**
-
-[Brief description of what CWE-22/Path Traversal is, why it's dangerous, and common fix approaches]
+[Identify which file(s) and function(s) contain the vulnerability]
 
 ---
 
-## 3. Analysis Strategy & Process
+## 2. Vulnerability Analysis
 
-**How the agent works:**
+**Root Cause:**
 
-[Describe the steps your agent takes to analyze and fix the code]
+[Explain the specific code pattern or logic that causes the vulnerability]
 
-**Vulnerability Understanding:**
+**Attack Vector:**
 
-[Brief description of how the agent understood CWE-22/Path Traversal]
+[Describe how an attacker could exploit this vulnerability]
 
-**Fix Applied:**
+**Severity:**
 
-[What fix did your agent determine? How does it work?]
-
-**Key Design Decisions:**
-
-[Explain your key design decisions, including how you provided CWE-22 context to the agent and how you validated the fix]
+[Impact assessment - what could an attacker achieve?]
 
 ---
 
-## 4. Performance Metrics
+## 3. Research Findings
 
-- **Total Time:** [X minutes]
-- **LLM API Calls:** [N calls]
-- **Fix Attempts:** [N attempts]
-- **Test Iterations:** [N iterations]
-- **Success:** [Yes/No - did all tests pass?]
+**CWE/CVE Information:**
 
----
+[Summary of relevant information from CWE/CVE databases]
 
-## 5. What Worked Well
+**Common Fix Patterns:**
 
-[List 2-3 things that worked well]
+[List common approaches to fix this type of vulnerability]
 
----
+**Best Practices:**
 
-## 6. What Didn't Work / Challenges
-
-[List 2-3 challenges or things that didn't work]
+[Security best practices relevant to this vulnerability type]
 
 ---
 
-## 7. Limitations
+## 4. Proposed Fix
 
-[What are the limitations of your agent?]
+**Fix Strategy:**
 
----
+[Describe the approach taken to fix the vulnerability]
 
-## 8. Potential Improvements
+**Code Changes:**
 
-[What would you improve given more time?]
+[Detail the specific changes made to the code]
 
----
+**Validation:**
 
-## 9. Time Breakdown
-
-- Research & planning: [X minutes]
-- Agent implementation: [X minutes]
-- Testing & debugging: [X minutes]
-- Documentation: [X minutes]
-- **Total:** [X minutes]
+[Explain how the fix prevents the vulnerability]
 
 ---
 
-## 10. Additional Notes
+## 5. Testing Results
 
-[Any other observations, assumptions, or context]
+**Test Cases:**
+
+- [Test 1]: [Pass/Fail]
+- [Test 2]: [Pass/Fail]
+- [Test 3]: [Pass/Fail]
+
+**Security Validation:**
+
+[Confirm that the fix addresses the vulnerability without breaking functionality]
+
+---
+
+## 6. Additional Recommendations
+
+[Any additional security improvements or related issues to consider]
+
+---
+
+## 7. References
+
+[List of sources consulted during research]
