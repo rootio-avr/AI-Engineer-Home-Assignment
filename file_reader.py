@@ -22,8 +22,6 @@ def read_file(base_dir, filename):
         FileNotFoundError: If the file doesn't exist
         PermissionError: If the file can't be read
     """
-    # VULNERABLE: Direct path concatenation without validation
-    # This allows path traversal attacks like ../../../etc/passwd
     file_path = os.path.join(base_dir, filename)
 
     with open(file_path, 'r') as f:
