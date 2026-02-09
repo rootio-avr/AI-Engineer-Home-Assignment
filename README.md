@@ -81,11 +81,12 @@ Please briefly note in your submission how to run your solution (env variables, 
 
 ## Evaluation Criteria
 
-We will run your agent against our test suite. Your solution will be evaluated on:
+We will run your agent against our test suite. **Importantly, we will also run your agent internally on different vulnerability types (including CWE-22 and others) to assess generalizability.** Your agent should not be tailored to a single vulnerability — it must be capable of analyzing, identifying, and fixing a range of CWE types.
 
 | Criteria | What We Look For |
 |----------|------------------|
 | **Correctness** | All tests pass after the agent runs |
+| **Generalizability** | Agent works across different CWE types, not just the provided example |
 | **Autonomy** | Agent discovers the vulnerability without hardcoded hints |
 | **Research** | Agent fetches and uses external security resources |
 | **Reporting** | Clear, informative `REPORT.md` with metrics |
